@@ -9,7 +9,7 @@ campus.py  - Classe Campus
 cursos.py  - Lista de campus e cursos
 main.py    - Menu principal do sistema
 
-* Funções principais
+* Funções principais *
 
 - Cadastro de aluno (com validação de CPF)
 
