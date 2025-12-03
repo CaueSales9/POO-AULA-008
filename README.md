@@ -9,7 +9,7 @@ campus.py  - Classe Campus
 cursos.py  - Lista de campus e cursos
 main.py    - Menu principal do sistema
 
-* Funções principais *
+Funções principais:
 
 - Cadastro de aluno (com validação de CPF)
 
@@ -38,4 +38,4 @@ Python 3.8 ou superior
 
 Observações:
 Sistema totalmente no terminal
-Monitoria soma horas à carga obrigatór
+Monitoria soma horas à carga obrigatória
