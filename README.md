@@ -15,15 +15,15 @@ Cadastro de aluno (com validação de CPF)
 
 Login com usuário e senha
 
-Ver curso
+- Ver curso
 
-Trocar de curso
+- Trocar de curso
 
-Trancar curso
+- Trancar curso
 
-Deletar conta
+- Deletar conta
 
-Sistema de monitoria (virar monitor e registrar horas)
+- Sistema de monitoria (virar monitor e registrar horas)
 
 
 Como executar
