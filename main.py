@@ -2,11 +2,11 @@ from aluno import Aluno, Monitor
 from cursos import Cursos
 
 
-1
-class Main(Cursos):
+
+class Main():
     def __init__(self, nome_sistema: str):
-        super().__init__() 
         self.nome_sistema = nome_sistema
+        self.gerenciar = Cursos()
 
     def cadastrar_conta(self):
         print(f"Bem vindo ao {self.nome_sistema}!")
@@ -17,17 +17,17 @@ class Main(Cursos):
         senha = input("Crie sua senha:\n> ").strip()
         
         print("\nCampus disponíveis:")
-        for i, campus in enumerate(self.lista_campus):
+        for i, campus in enumerate(self.gerenciar.lista_campus):
             print(f"{i + 1} - {campus.nome}")
     
     
         try:
             opcao_campus = int(input('\nEscolha o número do seu campus:\n> ')) - 1
-            if opcao_campus < 0 or opcao_campus >= len(self.lista_campus):
+            if opcao_campus < 0 or opcao_campus >= len(self.gerenciar.lista_campus):
                 print("\nOpção inválida!\n")
                 return
             
-            campus_selecionado = self.lista_campus[opcao_campus]
+            campus_selecionado = self.gerenciar.lista_campus[opcao_campus]
         except ValueError:
             print("\nDigite um número válido!\n")
             return
@@ -38,7 +38,7 @@ class Main(Cursos):
     
         try:
             opcao_curso = int(input('\nEscolha o número do seu curso:\n> ')) - 1
-            if opcao_curso < 0 or opcao_curso >= len(campus_selecionado.cursos):
+            if opcao_curso < 0 or opcao_curso >= len(self.gerenciar.lista_campus):
                 print("\nOpção inválida!\n")
                 return
             
@@ -50,7 +50,7 @@ class Main(Cursos):
 
         cpf_num = ''.join(filter(str.isdigit, cpf))
         
-        for aluno in self.contas:
+        for aluno in self.gerenciar.contas:
             if aluno.cpf == cpf_num:
                 print("\nCPF já cadastrado!\n")
                 return
@@ -64,7 +64,7 @@ class Main(Cursos):
             print("\nCPF inválido!\n")
             return
 
-        self.contas.append(aluno_novo)
+        self.gerenciar.contas.append(aluno_novo)
         print(f"\nConta criada com sucesso!\nUsuário: {aluno_novo.nome}\nCampus: {aluno_novo.campus}\nCurso: {aluno_novo.curso}")
 
     def login(self):
@@ -75,7 +75,7 @@ class Main(Cursos):
         aluno_logado = None
         curso_monitoria = 'Nenhuma'
 
-        for aluno in self.contas:
+        for aluno in self.gerenciar.contas:
             if aluno.nome == nome and aluno.senha == senha:
                 aluno_logado = aluno
                 break
@@ -110,15 +110,15 @@ class Main(Cursos):
             elif menu_login == 2:
                 print("\n== Troca de Curso ==")
                 print("Campus disponíveis:")
-                for i, campus in enumerate(self.lista_campus):
+                for i, campus in enumerate(self.gerenciar.lista_campus):
                     print(f"{i + 1} - {campus.nome}")
 
                 try:
                     op_camp = int(input('Escolha o número do novo campus:\n> ')) - 1
-                    if op_camp < 0 or op_camp >= len(self.lista_campus):
+                    if op_camp < 0 or op_camp >= len(self.gerenciar.lista_campus):
                         print("\nOpção inválida!\n")
                         continue
-                    campus_obj = self.lista_campus[op_camp]
+                    campus_obj = self.gerenciar.lista_campus[op_camp]
                 except ValueError:
                     print("\nDigite um número válido!\n")
                     continue
@@ -152,7 +152,7 @@ class Main(Cursos):
             elif menu_login == 4:
                 confirmar = input('\nTem certeza que deseja deletar sua conta? (s/n):\n> ').strip().lower()
                 if confirmar == 's':
-                    self.contas.remove(aluno_logado)
+                    self.gerenciar.contas.remove(aluno_logado)
                     print('\nConta deletada com sucesso!\n')
                     return
                 else:
@@ -171,15 +171,15 @@ class Main(Cursos):
                     
                 if escolha_monitoria == 1:
                     print("\nCampus disponíveis:")
-                    for i, campus in enumerate(self.lista_campus):
+                    for i, campus in enumerate(self.gerenciar.lista_campus):
                         print(f"{i + 1} - {campus.nome}")
     
                     try:
                         opcao_campus = int(input('\nEscolha o campus para dar monitoria:\n> ')) - 1
-                        if opcao_campus < 0 or opcao_campus >= len(self.lista_campus):
+                        if opcao_campus < 0 or opcao_campus >= len(self.gerenciar.lista_campus):
                              print("Opção inválida")
                              continue
-                        campus_selecionado = self.lista_campus[opcao_campus]
+                        campus_selecionado = self.gerenciar.lista_campus[opcao_campus]
                     except ValueError:
                         print("\nDigite um número válido!\n")
                         continue
@@ -209,8 +209,8 @@ class Main(Cursos):
                     
                     novo_monitor.horas_cumpridas = aluno_logado.horas_cumpridas
 
-                    self.contas.remove(aluno_logado)
-                    self.contas.append(novo_monitor)
+                    self.gerenciar.contas.remove(aluno_logado)
+                    self.gerenciar.contas.append(novo_monitor)
                     aluno_logado = novo_monitor
                     
                     print(f"\nParabéns! Você agora é monitor de {curso_monitoria}!")
@@ -260,7 +260,7 @@ class Main(Cursos):
 
     def listar_cursos_geral(self):
         print("\n== Lista de Campus e Cursos ==")
-        for campus in self.lista_campus:
+        for campus in self.gerenciar.lista_campus:
             print(f"\nCampus: {campus.nome}")
             for curso in campus.cursos:
                 print(f"  - {curso}")
